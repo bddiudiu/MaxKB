@@ -153,6 +153,11 @@ class UserPageApi(APIMixin):
         )]
 
     @staticmethod
+    def get_request():
+        return serializers.ListSerializer(child=serializers.CharField(required=True), required=True,
+                                          label=_('User IDs'))
+
+    @staticmethod
     def get_response():
         return UserListResponse
 
