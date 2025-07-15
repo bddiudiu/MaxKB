@@ -26,12 +26,10 @@ on:
       registry:
         description: 'Push To Registry'
         required: true
-        default: 'fit2cloud-registry'
+        default: 'dockerhub'
         type: choice
         options:
-          - fit2cloud-registry
           - dockerhub
-          - dockerhub, fit2cloud-registry
 
 jobs:
   build-and-push-to-dockerhub:
