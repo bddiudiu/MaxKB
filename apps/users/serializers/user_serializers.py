@@ -95,7 +95,7 @@ class LoginSerializer(ApiMixin, serializers.Serializer):
 
     password = serializers.CharField(required=True, error_messages=ErrMessage.char(_("Password")))
 
-    captcha = serializers.CharField(required=True, error_messages=ErrMessage.char(_("captcha")))
+    # captcha = serializers.CharField(required=True, error_messages=ErrMessage.char(_("captcha")))
 
     def is_valid(self, *, raise_exception=False):
         """
@@ -104,10 +104,10 @@ class LoginSerializer(ApiMixin, serializers.Serializer):
         :return: User information
         """
         super().is_valid(raise_exception=True)
-        captcha = self.data.get('captcha')
-        captcha_value = captcha_cache.get(f"LOGIN:{captcha.lower()}")
-        if captcha_value is None:
-            raise AppApiException(1005, _("Captcha code error or expiration"))
+        # captcha = self.data.get('captcha')
+        # captcha_value = captcha_cache.get(f"LOGIN:{captcha.lower()}")
+        # if captcha_value is None:
+        #     raise AppApiException(1005, _("Captcha code error or expiration"))
         username = self.data.get("username")
         password = password_encrypt(self.data.get("password"))
         user = QuerySet(User).filter(Q(username=username,
@@ -140,7 +140,7 @@ class LoginSerializer(ApiMixin, serializers.Serializer):
             properties={
                 'username': openapi.Schema(type=openapi.TYPE_STRING, title=_("Username"), description=_("Username")),
                 'password': openapi.Schema(type=openapi.TYPE_STRING, title=_("Password"), description=_("Password")),
-                'captcha': openapi.Schema(type=openapi.TYPE_STRING, title=_("captcha"), description=_("captcha"))
+                # 'captcha': openapi.Schema(type=openapi.TYPE_STRING, title=_("captcha"), description=_("captcha"))
             }
         )
 
